@@ -1,8 +1,18 @@
 let humanScore = 0;
 let computerScore = 0;
-let gameCounter = 0
-let humanChoice = ""
-let computerChoice = ""
+let humanScr = document.getElementById("humanScr");
+let computerScr = document.getElementById("computerScr");
+let gameCounter = 0;
+let humanChoice = "";
+let computerChoice = "";
+let rock = document.getElementById("rock");
+let paper = document.getElementById("paper");
+let scissors = document.getElementById("scissors");
+rock.addEventListener('click',() => playRound('rock'));
+paper.addEventListener('click',() => playRound('paper'));
+scissors.addEventListener('click',() => playRound('scissors'));
+
+
 
 
 
@@ -21,52 +31,61 @@ function getComputerChoice () {
     return choice
 }
 
-function getHumanChoice() {
-    let choice = window.prompt("Rock, paper, or Scissors?");
-    return choice.toLowerCase()
+function restartGame() {
+    humanScore = 0;
+    computerScore = 0;
+    humanScr.textContent = "Your score: " + humanScore;
+    computerScr.textContent = "Computers score: " + computerScore;
+
 }
 
-function playRound(humanChoice, computerChoice){
+
+
+function playRound(humanChoice) {
+    computerChoice = getComputerChoice();
+    
     if (humanChoice ==="rock" && computerChoice !== "rock") {
         if (computerChoice === "scissors") {
-            console.log("You win! Rock beats Scissors")
-            humanScore++ 
+            alert("You win! Rock beats Scissors")
+            humanScore++;
+            humanScr.textContent = "Your score: " + humanScore;
         } else if (computerChoice === "paper") {
-            console.log("You lost! Paper beats Rock")
-            computerScore++
+            alert("You lost! Paper beats Rock")
+            computerScore++;
+            computerScr.textContent = "Computers score: " + computerScore;
+            
         }
     }
     else if (humanChoice === "scissors" && computerChoice !== "scissors") {
         if (computerChoice === "paper") {
-            console.log("You win! Scissors beats Paper")
-            humanScore++ 
+            alert("You win! Scissors beats Paper")
+            humanScore++;
+            humanScr.textContent = "Your score: " + humanScore;
         } else if (computerChoice === "rock") {
-            console.log("You lose! Rock beats Scissors")
-            computerScore++
+            alert("You lose! Rock beats Scissors")
+            computerScore++;
+            computerScr.textContent = "Computers score: " + computerScore;
         }
     }
     else if (humanChoice === "paper" && computerChoice !== "paper") {
         if (computerChoice === "rock") {
-            console.log("You win! Paper beats Rock")
-            humanScore++ 
+            alert("You win! Paper beats Rock")
+            humanScore++;
+            humanScr.textContent = "Your score: " + humanScore;
         } else if (computerChoice === "scissors") {
-            console.log("You lost! Scissors beats Paper")
-            computerScore++
+            alert("You lost! Scissors beats Paper")
+            computerScore++;
+            computerScr.textContent = "Computers score: " + computerScore;
         }
     } else {
-        console.log("It's a tie! Both choices were " + humanChoice)
+        alert("It's a tie! Both choices were " + humanChoice)
     }
-}
-
-function playGame () {
-    while (gameCounter != 5) {
-        console.log(gameCounter)
-        humanChoice = getHumanChoice()
-        computerChoice = getComputerChoice()
-        console.log(humanChoice, computerChoice)
-        console.log(playRound(humanChoice, computerChoice))
-
-        gameCounter++
+    if (humanScore == 5) {
+        alert("You win best of 5!");
+        restartGame();
+    } else if (computerScore == 5) {
+        alert("Computer wins best of 5!");
+        restartGame();
         
     }
 }
@@ -75,5 +94,7 @@ function playGame () {
 
 
 
-console.log(playGame())
-console.log("Your Score= " + humanScore, "Computers Score= "+computerScore)
+
+
+// console.log(playGame())
+// console.log("Your Score= " + humanScore, "Computers Score= "+computerScore)
